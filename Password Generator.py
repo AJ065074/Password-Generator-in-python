@@ -2,7 +2,6 @@ import random
 import string
 
 def generatePassword(pwlength, use_symbols, use_uppercase, use_lowercase, use_numbers):
-    # Create the character pool based on user preferences
     alphabet = ""
     if use_lowercase:
         alphabet += string.ascii_lowercase
@@ -25,18 +24,18 @@ def main():
     numPasswords = int(input("How many passwords do you want to generate? "))
     print("Generating " + str(numPasswords) + " passwords")
 
-    # Asking for password criteria
+    
     use_symbols = input("Do you want to add symbols? (yes/no): ").strip().lower() == 'yes'
     use_uppercase = input("Do you want to add uppercase characters? (yes/no): ").strip().lower() == 'yes'
     use_lowercase = input("Do you want to add lowercase characters? (yes/no): ").strip().lower() == 'yes'
     use_numbers = input("Do you want to add numbers? (yes/no): ").strip().lower() == 'yes'
     
-    # Asking for password length
+
     length = int(input("Enter the length of the passwords (minimum length should be 3): "))
     if length < 3:
         length = 3
 
-    # Generate passwords
+
     passwords = generatePassword(length, use_symbols, use_uppercase, use_lowercase, use_numbers)
 
     # Prints generated passwords
