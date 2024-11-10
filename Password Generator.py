@@ -25,13 +25,13 @@ def main():
     numPasswords = int(input("How many passwords do you want to generate? "))
     print("Generating " + str(numPasswords) + " passwords")
 
-    # Ask for password criteria
+    # Asking for password criteria
     use_symbols = input("Do you want to add symbols? (yes/no): ").strip().lower() == 'yes'
     use_uppercase = input("Do you want to add uppercase characters? (yes/no): ").strip().lower() == 'yes'
     use_lowercase = input("Do you want to add lowercase characters? (yes/no): ").strip().lower() == 'yes'
     use_numbers = input("Do you want to add numbers? (yes/no): ").strip().lower() == 'yes'
     
-    # Ask for password length
+    # Asking for password length
     length = int(input("Enter the length of the passwords (minimum length should be 3): "))
     if length < 3:
         length = 3
@@ -39,7 +39,7 @@ def main():
     # Generate passwords
     passwords = generatePassword(length, use_symbols, use_uppercase, use_lowercase, use_numbers)
 
-    # Print generated passwords
+    # Prints generated passwords
     for i in range(numPasswords):
         print("Password #" + str(i + 1) + " = " + passwords[i])
 
