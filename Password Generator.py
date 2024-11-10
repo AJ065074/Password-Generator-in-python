@@ -1,63 +1,46 @@
 import random
+import string
 
-def generatePassword(pwlength):
+def generatePassword(pwlength, use_symbols, use_uppercase, use_lowercase, use_numbers):
+    # Create the character pool based on user preferences
+    alphabet = ""
+    if use_lowercase:
+        alphabet += string.ascii_lowercase
+    if use_uppercase:
+        alphabet += string.ascii_uppercase
+    if use_numbers:
+        alphabet += string.digits
+    if use_symbols:
+        alphabet += string.punctuation
 
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    passwords = []
 
-    passwords = [] 
+    for _ in range(pwlength):
+        password = "".join(random.choice(alphabet) for _ in range(pwlength))
+        passwords.append(password)
 
-    for i in pwlength:
-        
-        password = "" 
-        for j in range(i):
-            next_letter_index = random.randrange(len(alphabet))
-            password = password + alphabet[next_letter_index]
-        
-        password = replaceWithNumber(password)
-        password = replaceWithUppercaseLetter(password)
-        
-        passwords.append(password) 
-    
     return passwords
 
-
-def replaceWithNumber(pword):
-    for i in range(random.randrange(1,3)):
-        replace_index = random.randrange(len(pword)//2)
-        pword = pword[0:replace_index] + str(random.randrange(10)) + pword[replace_index+1:]
-        return pword
-
-
-def replaceWithUppercaseLetter(pword):
-    for i in range(random.randrange(1,3)):
-        replace_index = random.randrange(len(pword)//2,len(pword))
-        pword = pword[0:replace_index] + pword[replace_index].upper() + pword[replace_index+1:]
-        return pword
-
-
-
 def main():
-    
     numPasswords = int(input("How many passwords do you want to generate? "))
-    
-    print("Generating " +str(numPasswords)+" passwords")
-    
-    passwordLengths = []
+    print("Generating " + str(numPasswords) + " passwords")
 
-    print("Minimum length of password should be 3")
+    # Ask for password criteria
+    use_symbols = input("Do you want to add symbols? (yes/no): ").strip().lower() == 'yes'
+    use_uppercase = input("Do you want to add uppercase characters? (yes/no): ").strip().lower() == 'yes'
+    use_lowercase = input("Do you want to add lowercase characters? (yes/no): ").strip().lower() == 'yes'
+    use_numbers = input("Do you want to add numbers? (yes/no): ").strip().lower() == 'yes'
+    
+    # Ask for password length
+    length = int(input("Enter the length of the passwords (minimum length should be 3): "))
+    if length < 3:
+        length = 3
 
+    # Generate passwords
+    passwords = generatePassword(length, use_symbols, use_uppercase, use_lowercase, use_numbers)
+
+    # Print generated passwords
     for i in range(numPasswords):
-        length = int(input("Enter the length of Password #" + str(i+1) + " "))
-        if length<3:
-            length = 3
-        passwordLengths.append(length)
-    
-    
-    Password = generatePassword(passwordLengths)
-
-    for i in range(numPasswords):
-        print ("Password #"+str(i+1)+" = " + Password[i])
-
-
+        print("Password #" + str(i + 1) + " = " + passwords[i])
 
 main()
